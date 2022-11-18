@@ -1,4 +1,5 @@
 const {writeExifImg}= require("./lib/exif.js");
+const config = require("./config/config.json");
 
 const {
   default: botSticker,
@@ -54,7 +55,7 @@ const {
       })=> {
         const msg = messages[0];
         if (!msg.message || msg.key.remoteJid === "status@broadcast" || msg.key.fromMe||!msg.message.imageMessage)return;
-
+if(msg.key.remoteJid === config.idGroup){
         let caption = msg.message.imageMessage.caption;
 
         let buffer = await downloadMediaMessage(msg, "buffer", {}, {
@@ -66,6 +67,7 @@ const {
         if (caption === 'buatkan sticker') {
           sock.sendMessage(msg.key.remoteJid, {sticker:{url: buffer}});
         }
+}
 
       });
 
