@@ -1,5 +1,7 @@
 const {writeExifImg}= require("./lib/exif.js");
 const config = require("./config/config.json");
+const scheduledMsg = require("./config/scheduledMsg.json");
+const schedule = require("node-schedule");
 
 const {
   default: botSticker,
@@ -73,6 +75,14 @@ if(msg.key.remoteJid === config.idGroup){
 
     sock.ev.on("creds.update",
       saveState);
+
+    scheduledMsg.forEach(el=>{
+      let date = new Date(el.date+"T"+el.time);
+      if(date == "Invalid Date") date = el.cron;
+      schedule.scheduleJob(date, ()=>{
+        sock.sendMessage(config.idGroup, {text: el.msg});
+      })
+    })
   }
 
 
