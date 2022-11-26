@@ -1,0 +1,15 @@
+[
+  {
+    "cron":"0 0 7 * * 0",
+      "msg":"selamat weekend"
+  },
+  {
+    "date":"2023-01-01",
+    "time":"00:00:00",
+    "msg":"selamat tahun baru"
+  },
+  {
+    "cron": "*/5 * * * * *",
+    "msg":"hallo, test"
+  }
+]
