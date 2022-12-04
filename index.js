@@ -1,3 +1,4 @@
+const fs = require("fs");
 const {writeExifImg}= require("./lib/exif.js");
 const config = require("./config/config.json");
 const scheduledMsg = require("./config/scheduledMsg.json");
@@ -68,6 +69,7 @@ if(msg.key.remoteJid === config.idGroup){
         
         if (caption === 'buatkan sticker') {
           sock.sendMessage(msg.key.remoteJid, {sticker:{url: buffer}});
+          fs.unlinkSync(buffer);
         }
 }
 
